@@ -11,7 +11,7 @@ import SwiftUI
 struct Pixel_AppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            OnboardingView()
         }
     }
 }
