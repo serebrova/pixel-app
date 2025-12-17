@@ -9,12 +9,16 @@ import SwiftUI
 
 enum Assets {
     // MARK: - Images
-    enum Images {
-        static let onboardingBackground = "OnboardingBackground"
-        
-        static func image(named name: String) -> Image {
-            Image(name)
-        }
+    enum Images: String {
+        case onboardingBackground = "OnboardingBackground"
+        case arrowUp = "arrowUp"
+        case background = "Backgound"
+        case dialogueArrow = "dialogueArrow"
+        case talkingGhost = "talkingGhost"
+    }
+    
+    static func image(named name: Images) -> Image {
+        Image(name.rawValue)
     }
     
     // MARK: - Colors
@@ -24,6 +28,7 @@ enum Assets {
         static let purple = Color("purple")
         static let rose = Color("rose")
         static let white = Color("white")
+        static let purpleShadow = Color("purpleShadow")
     }
     
     // MARK: - Fonts
