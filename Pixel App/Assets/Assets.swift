@@ -15,6 +15,13 @@ enum Assets {
         case background = "Backgound"
         case dialogueArrow = "dialogueArrow"
         case talkingGhost = "talkingGhost"
+        case cake = "cake"
+        case cakePiece = "cakePiece"
+        case textfieldSubmit = "textfieldSubmit"
+        case submitButtonWhite = "submitButtonWhite"
+        case upThumb = "upThumb"
+        case downThumb = "downThumb"
+        case crown = "crown"
     }
     
     static func image(named name: Images) -> Image {
@@ -29,6 +36,7 @@ enum Assets {
         static let rose = Color("rose")
         static let white = Color("white")
         static let purpleShadow = Color("purpleShadow")
+        static let purpleTextfield = Color("purpleTextfield")
     }
     
     // MARK: - Fonts

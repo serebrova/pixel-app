@@ -10,7 +10,7 @@ import SwiftUI
 struct DialogueItem: Identifiable {
     let id = UUID()
     let text: String
-    let image: Assets.Images
+    let image: Assets.Images?
     let imagePosition: ImagePosition
     
     enum ImagePosition {
@@ -23,9 +23,6 @@ struct TalkingGhostView: View {
     let items: [DialogueItem]
     
     var body: some View {
-        ZStack {
-            Assets.Colors.purple
-            
             VStack(alignment: .trailing, spacing: 0) {
                 VStack(alignment: .leading, spacing: 8) {
                     ForEach(items) { item in
@@ -60,7 +57,6 @@ struct TalkingGhostView: View {
                     .padding(.top, 11)
             }
         }
-    }
 }
 
 struct DialogueLineView: View {
@@ -68,16 +64,16 @@ struct DialogueLineView: View {
     
     var body: some View {
         HStack(spacing: 8) {
-            if item.imagePosition == .leading {
-                Assets.image(named: item.image)
+            if let image = item.image, item.imagePosition == .leading {
+                Assets.image(named: image)
             }
             
             Text(item.text)
                 .font(Assets.Fonts.minecraft(size: 24))
                 .foregroundStyle(Assets.Colors.purple)
             
-            if item.imagePosition == .trailing {
-                Assets.image(named: item.image)
+            if let image = item.image, item.imagePosition == .trailing {
+                Assets.image(named: image)
             }
         }
     }
@@ -85,7 +81,7 @@ struct DialogueLineView: View {
 
 #Preview {
     TalkingGhostView(items: [
-        DialogueItem(text: "Hello!", image: .talkingGhost, imagePosition: .trailing),
-        DialogueItem(text: "Welcome", image: .talkingGhost, imagePosition: .leading)
+        DialogueItem(text: "IS YOUR BIRTHDAY", image: .cake, imagePosition: .leading),
+        DialogueItem(text: "TODAY?", image: .cakePiece, imagePosition: .trailing)
     ])
 }

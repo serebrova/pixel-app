@@ -1,17 +1,17 @@
 //
-//  OnboardingViewModel.swift
+//  BirthdayViewModel.swift
 //  Pixel App
 //
-//  Created by  Leila Serebrova on 16.12.2025.
+//  Created by  Leila Serebrova on 17.12.2025.
 //
 
 import SwiftUI
 
 @Observable
-class OnboardingViewModel: YesNoButtonsViewModel {
+class BirthdayViewModel: YesNoButtonsViewModel {
     var selection: YesNoSelection = .none
     var blinkingButton: YesNoSelection = .none
-    var shouldNavigateToBirthday: Bool = false
+    var shouldNavigateToName: Bool = false
     
     var showYesArrow: Bool {
         selection == .yes
@@ -37,7 +37,7 @@ class OnboardingViewModel: YesNoButtonsViewModel {
         let blinkDuration = 0.1
         let blinkCount = 3
         DispatchQueue.main.asyncAfter(deadline: .now() + blinkDuration * Double(blinkCount * 2)) {
-            self.shouldNavigateToBirthday = true
+            self.shouldNavigateToName = true
         }
     }
     
