@@ -9,13 +9,28 @@ import SwiftUI
 
 struct DialogueItem: Identifiable {
     let id = UUID()
-    let text: String
+    let text: String?
+    let attributedText: AttributedString?
     let image: Assets.Images?
     let imagePosition: ImagePosition
     
     enum ImagePosition {
         case leading
         case trailing
+    }
+    
+    init(text: String, image: Assets.Images? = nil, imagePosition: ImagePosition = .leading) {
+        self.text = text
+        self.attributedText = nil
+        self.image = image
+        self.imagePosition = imagePosition
+    }
+    
+    init(attributedText: AttributedString, image: Assets.Images? = nil, imagePosition: ImagePosition = .leading) {
+        self.text = nil
+        self.attributedText = attributedText
+        self.image = image
+        self.imagePosition = imagePosition
     }
 }
 
@@ -68,9 +83,14 @@ struct DialogueLineView: View {
                 Assets.image(named: image)
             }
             
-            Text(item.text)
-                .font(Assets.Fonts.minecraft(size: 24))
-                .foregroundStyle(Assets.Colors.purple)
+            if let attributedText = item.attributedText {
+                Text(attributedText)
+                    .font(Assets.Fonts.minecraft(size: 24))
+            } else if let text = item.text {
+                Text(text)
+                    .font(Assets.Fonts.minecraft(size: 24))
+                    .foregroundStyle(Assets.Colors.purple)
+            }
             
             if let image = item.image, item.imagePosition == .trailing {
                 Assets.image(named: image)
