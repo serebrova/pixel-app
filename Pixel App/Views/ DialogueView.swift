@@ -18,7 +18,31 @@ struct DialogueView: View {
     let state: DialogueState
     var onButtonTap: (() -> Void)? = nil
     
+    // Тексты кнопок с дефолтными значениями
+    let goodButtonText: String
+    let badButtonText: String
+    let yesButtonText: String
+    let noButtonText: String
+    
     @State private var blinkOpacity: Double = 1.0
+    
+    init(
+        text: String,
+        state: DialogueState,
+        onButtonTap: (() -> Void)? = nil,
+        goodButtonText: String = "COOL",
+        badButtonText: String = "RETYPE",
+        yesButtonText: String = "YES",
+        noButtonText: String = "NO"
+    ) {
+        self.text = text
+        self.state = state
+        self.onButtonTap = onButtonTap
+        self.goodButtonText = goodButtonText
+        self.badButtonText = badButtonText
+        self.yesButtonText = yesButtonText
+        self.noButtonText = noButtonText
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -51,13 +75,13 @@ struct DialogueView: View {
     private var buttonsView: some View {
         switch state {
         case .good:
-            button(text: "COOL", color: Assets.Colors.pink, rotation: -5, thumbImage: .upThumb)
+            button(text: goodButtonText, color: Assets.Colors.pink, rotation: -5, thumbImage: .upThumb)
         case .bad:
-            button(text: "RETYPE", color: Assets.Colors.purple, rotation: 5, thumbImage: .downThumb)
+            button(text: badButtonText, color: Assets.Colors.purple, rotation: 5, thumbImage: .downThumb)
         case .both:
             HStack(spacing: 16) {
-                button(text: "YES", color: Assets.Colors.pink, rotation: -5, thumbImage: .upThumb)
-                button(text: "NO", color: Assets.Colors.purple, rotation: 5, thumbImage: .downThumb)
+                button(text: yesButtonText, color: Assets.Colors.pink, rotation: -5, thumbImage: .upThumb)
+                button(text: noButtonText, color: Assets.Colors.purple, rotation: 5, thumbImage: .downThumb)
             }
         }
     }
@@ -94,13 +118,11 @@ struct DialogueView: View {
         let blinkCount = 3
         
         for i in 0..<blinkCount {
-            // Hide
             DispatchQueue.main.asyncAfter(deadline: .now() + blinkDuration * Double(i * 2)) {
                 withAnimation(.linear(duration: 0.05)) {
                     blinkOpacity = 0.0
                 }
             }
-            // Show
             DispatchQueue.main.asyncAfter(deadline: .now() + blinkDuration * Double(i * 2 + 1)) {
                 withAnimation(.linear(duration: 0.05)) {
                     blinkOpacity = 1.0
@@ -108,7 +130,6 @@ struct DialogueView: View {
             }
         }
         
-        // После завершения анимации вызываем callback
         let totalAnimationDuration = blinkDuration * Double(blinkCount * 2)
         DispatchQueue.main.asyncAfter(deadline: .now() + totalAnimationDuration) {
             onButtonTap?()

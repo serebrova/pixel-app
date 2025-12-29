@@ -13,6 +13,7 @@ class AgeViewModel {
     var showDialogue: Bool = false
     var dialogueText: String = ""
     var dialogueState: DialogueState = .good
+    var shouldNavigateToGame: Bool = false
     
     func handleAgeSubmit() {
         let trimmedAge = age.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -31,8 +32,7 @@ class AgeViewModel {
     func handleButtonTap() {
         switch dialogueState {
         case .good:
-            // Можно добавить навигацию дальше, если нужно
-            break
+            shouldNavigateToGame = true
         case .bad:
             // Возвращаемся к вводу возраста
             showDialogue = false

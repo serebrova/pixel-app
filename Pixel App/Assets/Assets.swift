@@ -22,6 +22,7 @@ enum Assets {
         case upThumb = "upThumb"
         case downThumb = "downThumb"
         case crown = "crown"
+        case gift = "gift"
     }
     
     static func image(named name: Images) -> Image {

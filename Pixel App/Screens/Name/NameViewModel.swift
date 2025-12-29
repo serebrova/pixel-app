@@ -19,10 +19,10 @@ class NameViewModel {
         let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
         if trimmedName == "ДИМА" || trimmedName == "DIMA" {
-            dialogueText = "I knew it is your name!"
+            dialogueText = "I knew it is your name!".uppercased()
             dialogueState = .good
         } else {
-            dialogueText = "That is not your name!"
+            dialogueText = "That is not your name!".uppercased()
             dialogueState = .bad
         }
         
